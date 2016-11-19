@@ -12,3 +12,18 @@ router.get('/', function (req, res, next) {
 		res.send({movie:movies});
   });
 });
+
+router.post('/', function (req, res, next) {
+  console.log(req.body);
+  // res.json(req.body.title);
+
+   db.Movie.create({
+    title: req.body.title,
+    year: req.body.year,
+    imdbrating: req.body.imdbrating,
+  }).then(function(movie){
+    res.json(movie);
+  }).catch(function (error) {
+    res.json(error);
+  })
+});
